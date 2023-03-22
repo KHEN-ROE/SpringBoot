@@ -1,0 +1,19 @@
+package pnu.edu.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import pnu.edu.domain.Member;
+
+public class MemberService2 {
+
+	List<Member> list = new ArrayList<>();
+	
+	//생성자
+	public MemberService2() {
+		
+		list.add(new Member(1,"","",new Date()));
+	}
+	
+}

@@ -1,0 +1,26 @@
+package pnu.edu.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import pnu.edu.domain.Member;
+
+//service는 로직 수행
+@Service
+public class MemberService {
+
+	
+	public MemberService() {
+		
+	}
+	
+	public void getMember2() {
+		
+		
+		
+	}
+	
+}

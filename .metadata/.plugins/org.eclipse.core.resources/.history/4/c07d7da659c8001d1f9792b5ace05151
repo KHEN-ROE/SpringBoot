@@ -1,0 +1,46 @@
+package edu.pnu.controller;
+
+import java.util.ArrayList;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import pnu.edu.domain.Member;
+
+@RestController
+public class MemberController {
+
+	public MemberController() {
+		System.out.println("MemberController 생성");
+	}
+	
+	
+	@GetMapping("/Member")
+	public List<Member> getMembers(){
+//		List<Member> list = new ArrayList<>();
+//		list.add(new Member(1, "1234", "홍길동", new Date()));
+//		list.add(new Member(2, "1235", "홍길동1", new Date()));
+//		list.add(new Member(3, "1236", "홍길동2", new Date()));
+//		list.add(new Member(4, "1237", "홍길동3", new Date()));
+//		list.add(new Member(5, "1238", "홍길동4", new Date()));
+//		
+		MemberService m = new MemberService();
+		
+		
+		return list;	
+	}
+	
+	@GetMapping("/Member")
+	public Member getMember(@PathVariable int id) {
+		
+		
+		return null;
+		
+	}
+	
+	
+}
