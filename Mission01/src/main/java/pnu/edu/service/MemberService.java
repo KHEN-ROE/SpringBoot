@@ -67,7 +67,7 @@ public class MemberService {
 	}
 	
 	//delete
-	public Member deleteMember(int id) {
+	public Member deleteMember(Integer id) {
 		for(Member m1 : list) {
 			if(m1.getId()== id) {
 				list.remove(m1.getId());

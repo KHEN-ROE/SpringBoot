@@ -18,8 +18,6 @@ public class MemberDAO {
 	public static long timeInMilliSeconds = today.getTime();
 	public static java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
 	
-	
-	
 	public static String driver = "org.h2.Driver";
 	public static String url = "jdbc:h2:tcp://localhost/~/springboot";
 	public static String username = "sa";
@@ -28,6 +26,7 @@ public class MemberDAO {
 	public static Connection con;
 	public static PreparedStatement psmt;
 	public static ResultSet rs;
+	
 	
 	//생성자에서 db 연결
 	public MemberDAO() {
@@ -76,7 +75,7 @@ public class MemberDAO {
 			
 		}
 		catch(Exception e) {
-			System.out.println("db연결 오류");
+			System.out.println("get방식 오류");
 			e.printStackTrace();
 		}
 		
@@ -107,7 +106,7 @@ public class MemberDAO {
 			}
 		}
 		catch(Exception e) {
-			System.out.println("db연결 오류");
+			System.out.println("get방식2 오류");
 			e.printStackTrace();
 		}
 		
@@ -138,7 +137,7 @@ public class MemberDAO {
 		return getMember2(m.getId());
 	}
 	
-	//put방식 - update -- 근데 pass나 name 둘 중 하나가 null 일때? 이거 조건 추가할 것
+	//put방식 - update 
 	public MemberVO updateMember(MemberVO m) {
 		
 		try {	
@@ -146,22 +145,29 @@ public class MemberDAO {
 			String query = "UPDATE MEMBER SET pass = ?, name = ?  WHERE id = ? ";
 			//쿼리문 준비(쿼리문 작성했으면 바로 전달한다고 생각)
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, m.getPass());
-			psmt.setString(2, m.getName());
+			if(m.getPass() != "") { // pass 나 name 둘 중 하나만 업데이트할 경우 : 데이터 안 보내면 기존의 값 그대로 출력
+				psmt.setString(1, m.getPass());
+			}
+			else psmt.setString(1, mv.getPass());
+			
+			if(m.getName() != "") {
+				psmt.setString(2, m.getName());
+			}
+			else psmt.setString(2, mv.getName());
+
 			psmt.setInt(3, m.getId());
 			psmt.executeUpdate();
 		}
 		catch(Exception e) {
-			System.out.println("db 연결 오류");
+			System.out.println("업데이트 중 오류 발생");
 			e.printStackTrace();
-			
 		}
-		
 		return getMember2(m.getId());
 	}
 	
 	//delete 
 	public MemberVO deleteMember(int id) {
+		
 		try {
 			//쿼리문 작성
 			String query = "DELETE FROM MEMBER WHERE id = ?";
@@ -175,8 +181,7 @@ public class MemberDAO {
 			System.out.println("삭제 중 오류 발생");
 			e.printStackTrace();
 		}
-		
-		return getMember2(id); //리턴이 왜 안될까?
+		return getMember2(id); 
 	}
 	
 	
