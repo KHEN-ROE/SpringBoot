@@ -16,8 +16,9 @@ import edu.pnu.domain.MemberVO;
 public class MemberDAOH2impl implements MemberInterface {
 
 	MemberVO mv;
+
 	Map<String, Object> map = new HashMap<>();
-	
+
 	public static Date today = new Date();
 	public static long timeInMilliSeconds = today.getTime();
 	public static java.sql.Date sqlDate = new java.sql.Date(timeInMilliSeconds);
@@ -151,7 +152,6 @@ public class MemberDAOH2impl implements MemberInterface {
 			stmt.executeUpdate(query);
 			map.put("query", query);
 			map.put("method", "PUT");
-			
 		}
 		catch(Exception e) {
 			System.out.println("업데이트 오류");

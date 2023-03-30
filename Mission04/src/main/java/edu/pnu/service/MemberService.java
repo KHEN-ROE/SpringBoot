@@ -13,15 +13,16 @@ public class MemberService {
 
 	MemberInterface memberDao = new MemberDAOH2impl(); // 근데 왜 인터페이스 타입인가? 인터페이스에 사용할 메서드가 있고 
 //	MemberInterface memberDao = new MemberDAOListimpl();
+
 	LogDAO logdao = new LogDAOH2Impl();
 	
 	Map<String, Object> map1 = new HashMap<>();
-	
-	
+
 	//기본 생성자
 	public MemberService() {
 			
 	}
+
 	//read1
 	public Map<String, Object> getMembers() {
 		return logdao.addLog(memberDao.getMembers());
@@ -41,6 +42,7 @@ public class MemberService {
 	//delete
 	public Map<String, Object> deleteMember(Integer id) {
 		return logdao.addLog(memberDao.deleteMember(id));
+
 	}
 	
 }

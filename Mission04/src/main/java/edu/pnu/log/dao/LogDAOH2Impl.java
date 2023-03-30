@@ -42,6 +42,7 @@ public class LogDAOH2Impl implements LogDAO {
 	 
 	@Override
 	public Map<String, Object> addLog(Map<String, Object> map) {
+
 		//파라미터가 없다. 리턴 값은 필요없고. 뭘 저장할 지 부터 정한다. 파라미터값은 db에 있는 필드
 		try {
 			//쿼리문 작성
@@ -53,9 +54,10 @@ public class LogDAOH2Impl implements LogDAO {
 			psmt.setString(2, (String) map.get("query"));
 			//쿼리문 실행
 			psmt.executeUpdate();
+
 			map.put("method", map.get("method"));
 			map.put("query", map.get("query"));
-			
+
 		}
 		catch(Exception e) {
 			System.out.println("dblog 오류");

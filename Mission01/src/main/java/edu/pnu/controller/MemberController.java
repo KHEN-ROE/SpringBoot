@@ -51,7 +51,7 @@ public class MemberController {
 		return m1.updateMember(m);
 	}
 	
-	//근데 이렇게 하면 2번이랑 겹치지 않나?. 지우려니까 추가한 값만 지워지네?
+	//근데 이렇게 하면 2번이랑 겹치지 않나?. 그게 아니고, 요청 방식에 따라 다르게 맵핑 되는 거임. delete로 요청하면 됨
 	// 5. delete
 	@DeleteMapping("/Member/{id}")
 	public Member deleteMember(@PathVariable int id) {
