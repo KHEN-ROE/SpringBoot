@@ -1,7 +1,0 @@
-package pnu.edu.service;
-
-public class MemberService {
-
-	private List<Member> = new ArrayList<>();
-	
-}

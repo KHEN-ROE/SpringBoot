@@ -1,8 +1,0 @@
-package edu.pnu.controller;
-
-public class MemberController {
-
-	public MemberController() {
-		System.out.println("MemberController 생성");
-	}
-}
