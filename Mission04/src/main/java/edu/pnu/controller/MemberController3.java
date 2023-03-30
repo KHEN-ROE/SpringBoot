@@ -1,6 +1,6 @@
 package edu.pnu.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,31 +24,31 @@ public class MemberController3 {
 	
 	//get 방식
 	@GetMapping("/member3")
-	public List<MemberVO> getMembers() {
+	public Map<String, Object> getMembers() {
 		return ms.getMembers();
 	}
 	
 	//get 방식2
 	@GetMapping("/member3/{id}")
-	public MemberVO getMember(@PathVariable int id){
+	public Map<String, Object> getMember(@PathVariable int id){
 		return ms.getMember(id);
 	}
 	
 	//post 방식
 	@PostMapping("/member3")
-	public MemberVO addMember(MemberVO member) {
+	public Map<String, Object> addMember(MemberVO member) {
 		return ms.addMember(member);
 	}
 	
 	//put 방식
 	@PutMapping("/member3")
-	public MemberVO updateMember(MemberVO member) {
+	public Map<String, Object> updateMember(MemberVO member) {
 		return ms.updateMember(member);
 	}
 	
 	//delete 방식
 	@DeleteMapping("/member3/{id}")
-	public MemberVO deleteMember(@PathVariable Integer id) {
+	public Map<String, Object> deleteMember(@PathVariable Integer id) {
 		return ms.deleteMember(id);
 	}
 }

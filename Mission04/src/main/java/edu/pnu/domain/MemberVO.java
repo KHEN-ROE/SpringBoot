@@ -16,7 +16,6 @@ public class MemberVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 	public MemberVO(int id, String pass, String name, Date regidate) {
 		super();
 		this.id = id;
@@ -24,7 +23,6 @@ public class MemberVO {
 		this.name = name;
 		this.regidate = regidate;
 	}
-
 
 	public int getId() {
 		return id;

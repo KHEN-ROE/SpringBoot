@@ -2,11 +2,14 @@ package edu.pnu.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.pnu.domain.MemberVO;
 
@@ -24,7 +27,9 @@ public class MemberDAOH2impl implements MemberInterface {
 	public static String password = "";
 
 	public static Connection con;
+	public static Statement stmt;
 	public static PreparedStatement psmt;
+	
 	public static ResultSet rs;
 
 	// 생성자에서 db 연결
@@ -50,13 +55,13 @@ public class MemberDAOH2impl implements MemberInterface {
 	}
 
 	@Override
-	public List<MemberVO> getMembers() {
+	public Map<String, Object> getMembers() {
 		List<MemberVO> list = new ArrayList<>();
-
+		Map<String, Object> map = new HashMap<>();
 		try {
 			String query = "SELECT * FROM MEMBER";
-			psmt = con.prepareStatement(query);
-			rs = psmt.executeQuery();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -66,26 +71,27 @@ public class MemberDAOH2impl implements MemberInterface {
 				mv = new MemberVO(id, pass, name, date);
 				list.add(mv);
 			}
-
+			map.put("query", query);
+			map.put("list", list );
+			map.put("method", "GET");
+		
 		} catch (Exception e) {
 			System.out.println("get방식 오류");
 			e.printStackTrace();
 		}
-
-		return list;
+		return map;
 	}
 
 	@Override
-	public MemberVO getMember(Integer id) {
+	public Map<String, Object> getMember(Integer id) {
+		Map<String, Object> map = new HashMap<>();
 		try {
 			//쿼리문 작성
-			String query = "SELECT * FROM MEMBER WHERE id = ?";
+			String query = "SELECT * FROM MEMBER WHERE id = "+ id;
 			//쿼리문 준비
-			psmt = con.prepareStatement(query);
-			//쿼리문 세팅
-			psmt.setInt(1, id);
+			stmt = con.createStatement();
 			//쿼리문 실행
-			rs = psmt.executeQuery();
+			rs = stmt.executeQuery(query);
 			
 			while(rs.next()) {
 				int id1 = rs.getInt("id");
@@ -94,40 +100,42 @@ public class MemberDAOH2impl implements MemberInterface {
 				Date date = rs.getDate("regidate");
 				mv = new MemberVO(id1, pass, name, date);
 			}
+			map.put("query", query);
+			map.put("method", "GET");
+			map.put("data", mv);
 			
 		}
 		catch(Exception e) {
 			System.out.println("get방식2 오류");
 			e.printStackTrace();
 		}
-		return mv;
+		return map;
 	}
 
 	@Override
-	public MemberVO addMember(MemberVO member) {
+	public Map<String, Object> addMember(MemberVO member) {
+		Map<String, Object> map = new HashMap<>();
 		try {
 			//쿼리문 작성
-			String query = "INSERT INTO MEMBER VALUES(?,?,?,?)";
+			String query = "INSERT INTO MEMBER (ID, PASS, NAME, REGIDATE) VALUES " + "("+ member.getId() + ", '" + member.getPass() + "', '" + member.getName()  +"', '"+ sqlDate +"')";
 			//쿼리문 준비
-			psmt = con.prepareStatement(query);
-			//쿼리문 세팅
-			psmt.setInt(1, member.getId());
-			psmt.setString(2, member.getPass());
-			psmt.setString(3, member.getName());
-			psmt.setDate(4, sqlDate);
+			stmt = con.createStatement();
 			//쿼리문 실행
-			psmt.executeUpdate();
+			stmt.executeUpdate(query);
+			
+			map.put("query", query);
+			map.put("method", "POST");
 			
 		}
 		catch(Exception e) {
 			System.out.println("post 방식 오류");
 			e.printStackTrace();
 		}
-		return getMember(member.getId());
+		return map;
 	}
 
 	@Override
-	public MemberVO updateMember(MemberVO member) {
+	public Map<String, Object> updateMember(MemberVO member) {
 		try {
 			//쿼리문 작성
 			String query = "UPDATE MEMBER SET pass = ?, name = ? WHERE id = ?";
@@ -157,7 +165,7 @@ public class MemberDAOH2impl implements MemberInterface {
 	}
 
 	@Override
-	public MemberVO deleteMember(Integer id) {
+	public Map<String, Object> deleteMember(Integer id) {
 		try {
 			//쿼리문 작성
 			String query = "DELETE FROM MEMBER WHERE id = ?";
