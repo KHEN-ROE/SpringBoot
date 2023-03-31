@@ -18,8 +18,10 @@ public class MemberDAOListimpl implements MemberInterface {
 	public MemberDAOListimpl() {
 		for(int i=1; i<=5; i++) {
 			list.add(new MemberVO(i, i+"234", "홍길동"+i, new Date()));
-			map.put("list", list);
+			
 		}
+		map.put("data", list);
+		map.put("method", "GET");
 	}
 	
 	@Override

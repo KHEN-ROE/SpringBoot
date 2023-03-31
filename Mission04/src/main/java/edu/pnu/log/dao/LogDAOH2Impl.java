@@ -42,21 +42,26 @@ public class LogDAOH2Impl implements LogDAO {
 	 
 	@Override
 	public Map<String, Object> addLog(Map<String, Object> map) {
-
+		boolean success = true;
+		if( map.get("data") == null || map.get("id")== null || map.get("pass")== null || map.get("name")== null) {
+			success = false;
+		}
 		//파라미터가 없다. 리턴 값은 필요없고. 뭘 저장할 지 부터 정한다. 파라미터값은 db에 있는 필드
 		try {
 			//쿼리문 작성
-			String query = "INSERT INTO DBLOG(method, SQLSTRING) VALUES(?,?)";
+			String query = "INSERT INTO DBLOG(method, SQLSTRING, success) VALUES(?,?,?)";
+			
 			//쿼리문 준비
 			psmt = con.prepareStatement(query);
 			//쿼리문 세팅
 			psmt.setString(1, (String) map.get("method"));
 			psmt.setString(2, (String) map.get("query"));
+			psmt.setBoolean(3, success);
 			//쿼리문 실행
 			psmt.executeUpdate();
 
-			map.put("method", map.get("method"));
-			map.put("query", map.get("query"));
+//			map.put("method", map.get("method"));
+//			map.put("query", map.get("query"));
 
 		}
 		catch(Exception e) {
@@ -64,9 +69,5 @@ public class LogDAOH2Impl implements LogDAO {
 			e.printStackTrace();
 		}
 		return map;
-		
 	}
-	
-	
-	
 }

@@ -8,10 +8,10 @@ public class MemberVO {
 	private int id;
 	private String pass;
 	private String name;
-	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date regidate;
 	
+	//기본생성자
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
