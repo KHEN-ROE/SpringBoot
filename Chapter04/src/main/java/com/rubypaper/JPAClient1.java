@@ -20,17 +20,23 @@ public class JPAClient1 {
 		try {
 			// 트랜잭션 시작
 			tx.begin();
-			Board board = new Board();
-
-			board.setTitle("테스트 제목");
-			board.setWriter("TESTER");
-			board.setContent("테스트");
-			board.setCreateDate(new Date());
-			board.setCnt(0L);
-
-			// 글 등록
-			em.persist(board);
-
+			
+			for(int i=0; i<10; i++) {
+				if(i<9) {
+					Board board = new Board();
+					board.setTitle("테스트 제목");
+					board.setWriter("TESTER");
+					board.setContent("테스트");
+					board.setCreateDate(new Date());
+					board.setCnt(0L);
+					// 글 등록
+					em.persist(board);
+				}else {
+					System.out.println(10/0);
+				}
+			
+			
+			}
 			// 트랜잭션 commit
 			tx.commit();
 
@@ -46,8 +52,8 @@ public class JPAClient1 {
 		// EntityManager 생산하는 공장
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Chapter04");
 
-		for (int i = 0; i < 10; i++) {
+		
 			insertBoard(emf);
-		}
+		
 	}
 }
