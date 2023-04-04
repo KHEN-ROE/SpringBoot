@@ -2,6 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Chapter04">
 		<class>com.rubypaper.domain.Board</class>
+		<class>com.rubypaper.domain.Board2</class>
 		<properties>
 			<!-- 필수 속성 -->
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -15,9 +16,33 @@
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.id.new_generator_mappings" value="true"/>
-			<property name="hibernate.hbm2ddl.auto" value="update"/> <!-- 공부할 때 or 테스트할 때 아니면 create 안 씀 -->
+			<property name="hibernate.hbm2ddl.auto" value="create"/> <!-- 공부할 때 or 테스트할 때 아니면 create 안 씀 -->
 	
 		</properties>
 	
 	</persistence-unit>
+	
+	<persistence-unit name="MySQL">
+		<class>com.rubypaper.domain.Board</class>
+		<properties>
+			<!-- 필수 속성 -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.user" value="musthave"/>
+			<property name="javax.persistence.jdbc.password" value="tiger"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/musthave"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+		
+			<!-- 옵션 -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.use_sql_comments" value="false"/>
+			<property name="hibernate.id.new_generator_mappings" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/> <!-- 공부할 때 or 테스트할 때 아니면 create 안 씀 -->
+	
+		</properties>
+	</persistence-unit>
+	
 </persistence>
+
+
+
