@@ -36,4 +36,5 @@
     <fullyQualifiedTypeName name="org.hibernate.annotations.ColumnDefault"/>
     <fullyQualifiedTypeName name="lombok.AccessLevel"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="com.rubypaper.domain.Board2"/>
 </qualifiedTypeNameHistroy>
