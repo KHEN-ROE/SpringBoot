@@ -2,8 +2,8 @@
 <section name="Workbench">
 	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Users\SW\Downloads\mysql-connector-j-8.0.31\mysql-connector-j-8.0.31"/>
 	<item key="Annotations" value="true"/>
-	<item key="Replace" value="true"/>
-	<item key="Comments" value="true"/>
+	<item key="Replace" value="false"/>
+	<item key="Comments" value="false"/>
 	<item key="InstanceOf" value="false"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="group_libraries" value="true"/>
