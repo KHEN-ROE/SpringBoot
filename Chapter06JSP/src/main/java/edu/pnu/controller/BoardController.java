@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.pnu.domain.Board;
 import edu.pnu.service.BoardService;
 
-//controller 쓰는 순가 restAPI 제공 안 함.
+//controller 쓰면 restAPI 제공 안 함.
 //@RestController
 @Controller
 public class BoardController { //controller 방식은 앞에 한 mission들에서 뷰만 붙은 거임

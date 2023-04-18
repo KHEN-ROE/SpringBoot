@@ -19,6 +19,28 @@ public class BoardServiceImpl implements BoardService {
 		return (List<Board>) br.findAll();
 	}
 	
+	@Override
+	public Board getBoard(Board board) {
+		return br.findById(board.getSeq()).get();
+	}
 	
+	@Override
+	public void insertBoard(Board board) {
+		br.save(board);
+	}
+
+	@Override
+	public void updateBoard(Board board) {
+		Board findBoard = br.findById(board.getSeq()).get();
+		findBoard.setContent(board.getContent());
+		findBoard.setTitle(board.getTitle());
+		br.save(findBoard);
+		
+	}
+
+	@Override
+	public void deleteBoard(Board board) {
+		br.deleteById(board.getSeq());
+	}
 	
 }
