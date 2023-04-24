@@ -12,7 +12,7 @@ import edu.pnu.domain.Board;
 import edu.pnu.domain.Member;
 import edu.pnu.service.BoardService;
 
-@SessionAttributes("member")
+@SessionAttributes("member") // member라는 이름으로 model에 저장된 데이터는 자동으로 세션에 등록된다
 @Controller // - 뷰를 리턴
 public class BoardController {
 
@@ -39,35 +39,54 @@ public class BoardController {
 
 	// 상세내용 보기
 	@GetMapping("/getBoard")
-	public void getBoard(Board board, Model model) {
+	public String getBoard(@ModelAttribute("member") Member member, Board board, Model model) {
+		if(member.getId() == null) {
+			return "redirect:login";
+		}
+		
 		model.addAttribute("board", bs.getBoard(board));
+		
+		return "getBoard.html";
 	}
 	
 	//글 등록 화면을 보여주는 역할만 하는 메소드.
 	@GetMapping("/insertBoard")
-	public void insertView() {
-		
+	public String insertView(@ModelAttribute("member") Member member) {
+		if(member.getId() == null) {
+			return "redirect:login";
+		}
+		return "insertBoard";
 	}
 	
 	// 글 작성
 	@PostMapping("/insertBoard") // url은 insertBoard로 이동
-	public String insertBoard(Board board) { // 리턴 타입이 String이라는 뜻은 리턴한 페이지 따로 지정하겠다는 뜻.
+	public String insertBoard(@ModelAttribute("member") Member member, Board board) { // 리턴 타입이 String이라는 뜻은 리턴한 페이지 따로 지정하겠다는 뜻.
+		if(member.getId() == null) {
+			return "redirect:login";
+		}
+		
 		bs.insertBoard(board);
 		return "redirect:getBoardList";
 	}
 
 	// 글 수정
 	@PostMapping("/updateBoard")
-	public String updateBoard(Board board) { //게시글 수정 버튼 눌렀을 때 다른 페이지로 이동시켜서 수정시킬 수도 있다. 그러면 
+	public String updateBoard(@ModelAttribute("member") Member member, Board board) { //게시글 수정 버튼 눌렀을 때 다른 페이지로 이동시켜서 수정시킬 수도 있다. 그러면 
+		if(member.getId() == null) {
+			return "redirect:login";
+		}
+		
 		bs.updateBoard(board);
 		return "redirect:getBoardList";
 	}
 	
 	@GetMapping("/deleteBoard")
-	public String deleteBoard(Board board) {
+	public String deleteBoard(@ModelAttribute("member") Member member, Board board) {
+		if(member.getId() == null) {
+			return "redirect:login";
+		}
+		
 		bs.deleteBoard(board);
 		return "redirect:getBoardList";
 	}
-	
-	
 }
