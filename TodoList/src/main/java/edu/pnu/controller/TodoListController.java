@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,4 +36,17 @@ public class TodoListController {
 		System.out.println("Received todo item: " + todolist);
 		return ts.addList(todolist);
 	}
+	
+	@PutMapping("/api/todos")
+	public TodoList updateList(@RequestBody TodoList todolist) {
+		System.out.println("Received item to update: " + todolist);
+		return ts.updateList(todolist);
+	}
+	
+	@DeleteMapping("/api/todos/{id}")
+	public void deleteList(@RequestBody @PathVariable TodoList todolist) {
+		System.out.println("Received item to delete: " + todolist);
+		ts.deleteList(todolist);
+	}
+	
 }

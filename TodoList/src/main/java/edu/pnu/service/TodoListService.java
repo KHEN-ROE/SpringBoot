@@ -21,9 +21,19 @@ public class TodoListService {
 	
 	public TodoList addList(TodoList todolist) {
 		System.out.println("Saving todo item: " + todolist);
-		TodoList newTodoList = new TodoList();
-	    newTodoList.setText(todolist.getText());
-	    
-	    return tr.save(newTodoList);
+//		TodoList newTodoList = new TodoList();
+//	    newTodoList.setText(todolist.getText());
+//	    return tr.save(newTodoList);
+	    return tr.save(todolist);
+	}
+	
+	public TodoList updateList(TodoList todolist) {
+		TodoList tl = tr.findById(todolist.getId()).get();
+		tl.setText(todolist.getText());
+		return tr.save(tl);
+	}
+	
+	public void deleteList(TodoList todolist) {
+		tr.deleteById(todolist.getId());
 	}
 }
