@@ -27,13 +27,13 @@ public class TodoListService {
 	    return tr.save(todolist);
 	}
 	
-	public TodoList updateList(TodoList todolist) {
-		TodoList tl = tr.findById(todolist.getId()).get();
+	public TodoList updateList(TodoList todolist, Long id) {
+		TodoList tl = tr.findById(id).get();
 		tl.setText(todolist.getText());
 		return tr.save(tl);
 	}
 	
-	public void deleteList(TodoList todolist) {
-		tr.deleteById(todolist.getId());
+	public void deleteList(Long id) {
+		tr.deleteById(id);
 	}
 }

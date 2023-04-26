@@ -37,16 +37,17 @@ public class TodoListController {
 		return ts.addList(todolist);
 	}
 	
-	@PutMapping("/api/todos")
-	public TodoList updateList(@RequestBody TodoList todolist) {
-		System.out.println("Received item to update: " + todolist);
-		return ts.updateList(todolist);
+	@PutMapping("/api/todos/{id}")
+	public TodoList updateList(@RequestBody TodoList todolist, @PathVariable Long id){ //클라이언트에서 json형식으로 요청 바디에 담아서 put요청,
+																	// 여기서 바디를 추출하기 위해 @RequestBody를 쓰는거임
+		System.out.println("Received item to update:" +todolist);
+		return ts.updateList(todolist, id);
 	}
 	
 	@DeleteMapping("/api/todos/{id}")
-	public void deleteList(@RequestBody @PathVariable TodoList todolist) {
-		System.out.println("Received item to delete: " + todolist);
-		ts.deleteList(todolist);
+	public void deleteList(@RequestBody @PathVariable Long id) {
+		System.out.println("Received item to delete: " + id);
+		ts.deleteList(id);
 	}
 	
 }
